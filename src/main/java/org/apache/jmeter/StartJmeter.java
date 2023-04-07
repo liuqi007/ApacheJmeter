@@ -1,12 +1,9 @@
 package org.apache.jmeter;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class StartJmeter extends Thread {
@@ -81,6 +78,25 @@ public class StartJmeter extends Thread {
             return map;
         }
         return null;
+    }
+
+    @Override
+    public void run() {
+        Thread.currentThread().setContextClassLoader(loader);
+        try {
+            instance = initialClass.newInstance();
+            Method startUp = initialClass.getMethod("start", new Class[]{new String[0].getClass(), Map.class});
+            startUp.invoke(instance, new Object[]{args, testData});
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Object getInstance() {

@@ -2,10 +2,8 @@ package org.apache.jmeter;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.MessageToByteEncoder;
 
-import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
 public class ProtocolEncoder extends MessageToByteEncoder<ProtocolBean> {
