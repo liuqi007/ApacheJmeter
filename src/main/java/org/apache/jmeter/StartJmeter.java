@@ -43,7 +43,7 @@ public class StartJmeter extends Thread {
             String assertFailLogFile = logPath + File.separator + "ASSET_ERR_" + jobId + ".log";
 
             System.setProperty("jmeter.logfile", jmeterLogFile);
-            System.setProperty("assert.err.logfile", assertFailLogFile);
+            System.setProperty("assert.error.logfile", assertFailLogFile);
         }
 
         String scriptPath = testData.get("fullJmxFileName");
